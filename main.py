@@ -30,7 +30,10 @@ async def my_event_handler(event):
             try:
                 await client.send_file(main_channel, file=event.message, caption=text)
             except TypeError:
-                await client.send_message(main_channel, text)
+                try:
+                    await client.send_message(main_channel, text)
+                except:
+                    pass
     else:
         return
 
