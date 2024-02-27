@@ -28,12 +28,16 @@ async def my_event_handler(event):
     if check_linkss:
         if event.message:
             try:
-                await client.send_file(main_channel, file=event.message, caption=text)
+                # await client.send_file(main_channel, file=event.message, caption=text)
+                await client.forward_messages(main_channel, messages=event.message)
             except TypeError:
                 try:
-                    await client.send_message(main_channel, text)
+                    await client.send_file(main_channel, file=event.message, caption=text)
                 except:
-                    pass
+                    try:
+                        await client.send_message(main_channel, text)
+                    except:
+                        pass
     else:
         return
 
